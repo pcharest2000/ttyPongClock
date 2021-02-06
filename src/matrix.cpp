@@ -1,16 +1,23 @@
 #include "matrix.h"
 
-Matrix::Matrix() {
+Matrix::Matrix(configuration_t &config) {
   setlocale(LC_ALL, "");
   time_t t;
   srand((unsigned)time(&t));
   initscr();
+  if (has_colors() == FALSE) {
+    printf("Terminal has no color exitng\n");
+    exit(EXIT_FAILURE);
+  }
   cbreak();
   keypad(stdscr, TRUE); /* We get F1, F2 etc..		*/
-  noecho();
+  //  noecho();
   curs_set(0);
-  timeout(33);//30fps
-  //timeout(1000);//30fps
+  timeout(1000 / config.frameRate); // 30fps
+  start_color();
+  init_pair(1, config.fgColor, config.bgColor);
+  attron(COLOR_PAIR(1));
+  // timeout(1000);//30fps
   getmaxyx(stdscr, heigth, width);
   heigth = heigth * 2;
   // Alocate the pixel array
@@ -58,7 +65,7 @@ void Matrix::fillRnd() {
     for (int j = 0; j < width; j++)
       mat[i][j] = rand() % 2;
 }
-void Matrix::resize(){
+void Matrix::resize() {
   getmaxyx(stdscr, heigth, width);
   heigth = heigth * 2;
   // Alocate the pixel array

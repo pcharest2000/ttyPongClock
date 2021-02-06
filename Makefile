@@ -3,7 +3,7 @@
 #
 # @file
 # @version 0.1
-TARGET_EXEC ?= pong
+TARGET_EXEC ?= tty-pong-clock
 
 BUILD_DIR ?= ./build
 SRC_DIRS ?= ./src

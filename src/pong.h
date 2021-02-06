@@ -39,7 +39,7 @@ typedef struct {
 class Pong : public Matrix {
 
 public:
-  Pong();
+  Pong(configuration_t &config);
   void update();
   void draw();
 

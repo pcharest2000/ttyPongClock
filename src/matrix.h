@@ -10,6 +10,7 @@
 #include <unistd.h>
 #include <vector>
 #include <math.h>
+#include "config.h"
 using namespace std;
 class Matrix {
 protected:
@@ -18,7 +19,7 @@ protected:
   vector<vector<int>> mat;
 
 public:
-  Matrix();
+  Matrix(configuration_t &config);
   void draw();
   void clearScreen();
   void set(int i, int j);

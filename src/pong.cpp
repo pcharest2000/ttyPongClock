@@ -10,7 +10,7 @@ float RandomFloat(float min, float max) {
   return (random * range) + min;
 }
 
-Pong::Pong() {
+Pong::Pong(configuration_t &config):Matrix(config) {
   _paddleLeftY = 10;
   _paddleRigthY = 10;
   _ballVX = 1.3;
