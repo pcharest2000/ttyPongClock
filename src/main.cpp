@@ -10,12 +10,10 @@ configuration_t config = {.fgColor = 7, .bgColor = 0, .frameRate = 20};
     case 'h':
     default:
       printf(
-          "usage : tty-pong clock [-iuvsScbtrahDBxn] [-C [0-7]] [-f format] "
-          "[-d "
-          "delay] [-a nsdelay] [-T tty] \n"
-          "    -C            Set color                                      \n"
+          "usage : tty-pong-clock [-B [0-7] -C [0-7] -F [1-60] ]            \n"
+          "    -C            Set forground color                            \n"
           "    -B            Set background color                           \n"
-          "    -F            Set frame rate def 20                          "
+          "    -F            Set frame rate deffaut 30                        "
           "\n");
       exit(EXIT_SUCCESS);
       break;
@@ -28,7 +26,7 @@ configuration_t config = {.fgColor = 7, .bgColor = 0, .frameRate = 20};
         config.bgColor = atoi(optarg);
       break;
     case 'F':
-      if (atoi(optarg) >= 1 && atoi(optarg) < 70)
+      if (atoi(optarg) >= 1 && atoi(optarg) <= 60)
         config.frameRate = atoi(optarg);
       break;
     }
