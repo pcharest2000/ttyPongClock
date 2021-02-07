@@ -11,6 +11,11 @@ A tty clock that shows an animated pong game
 ![](https://raw.githubusercontent.com/pcharest2000/ttyPongClock/master/screenshots/screen02.png)
 ![](https://raw.githubusercontent.com/pcharest2000/ttyPongClock/master/screenshots/screen03.png)
 
+
+## Known issues
+
+When resizing the terminal sometimes it cores dump or screen is corrupted working on it!
+
 ## How do I install tty-pong-clock
 
 Requirements:

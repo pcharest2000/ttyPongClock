@@ -13,7 +13,7 @@ configuration_t config = {.fgColor = 7, .bgColor = 0, .frameRate = 20, .bigFont=
           "usage : tty-pong-clock [-B [0-7] -C [0-7] -F [1-60] ]            \n"
           "    -C            Set forground color                            \n"
           "    -B            Set background color                           \n"
-          "    -F            Set frame rate deffaut 30                      \n"
+          "    -F            Set frame rate default 30 fps                  \n"
           "    -b            Set big font                                     "
           "\n");
       exit(EXIT_SUCCESS);
