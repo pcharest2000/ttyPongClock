@@ -1,6 +1,7 @@
 #include "matrix.h"
 
 Matrix::Matrix(configuration_t &config) {
+  _config=config;
   setlocale(LC_ALL, "");
   time_t t;
   srand((unsigned)time(&t));
