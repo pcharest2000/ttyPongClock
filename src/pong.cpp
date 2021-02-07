@@ -10,7 +10,8 @@ float RandomFloat(float min, float max) {
   return (random * range) + min;
 }
 
-Pong::Pong(configuration_t &config):Matrix(config) {
+Pong::Pong(configuration_t &config) : Matrix(config) {
+  _config = config;
   _paddleLeftY = 10;
   _paddleRigthY = 10;
   _ballVX = 1.3;
@@ -33,20 +34,25 @@ Pong::Pong(configuration_t &config):Matrix(config) {
   pongTime.minute[1] = pongTime.tm->tm_min % 10;
 }
 
-void Pong::drawBigNumber(int n, int x, int y) {
+void Pong::drawNumber(int n, int x, int y) {
   for (int j = 0; j < 5; j++) {
     for (int i = 0; i < 3; i++) {
-      if (number[n][i + 3 * j])
+      if (number[n][i + 3 * j]) {
         set(j + y, i + x);
+      }
     }
   }
 }
 
-void Pong::drawNumber(int n, int x, int y) {
+void Pong::drawBigNumber(int n, int x, int y) {
   for (int j = 0; j < 5; j++) {
     for (int i = 0; i < 3; i++) {
-      if (number[n][i + 3 * j])
-        set(j + y, i + x);
+      if (number[n][i + 3 * j]) {
+        set(j * 2 + y, i * 2 + x);
+        set(j * 2 + y + 1, i * 2 + x);
+        set(j * 2 + y, i * 2 + x + 1);
+        set(j * 2 + y + 1, i * 2 + x + 1);
+      }
     }
   }
 }
@@ -55,17 +61,32 @@ void Pong::draw() {
   clearScreen();
   switch (_playState) {
   case NORMAL:
-    drawNumber(pongTime.hour[0], width / 2 - 3 - 2 * FONTW, 2);
-    drawNumber(pongTime.hour[1], width / 2 - 1 - FONTW, 2);
-    drawNumber(pongTime.minute[0], width / 2 + 2, 2);
-    drawNumber(pongTime.minute[1], width / 2 + 3 + FONTW, 2);
+    if (_config.bigFont) {
+      drawBigNumber(pongTime.hour[0], width / 2 - 2 - 2 * FONTW*2, 2);
+      drawBigNumber(pongTime.hour[1], width / 2 - 1 - FONTW*2, 2);
+      drawBigNumber(pongTime.minute[0], width / 2 + 2, 2);
+      drawBigNumber(pongTime.minute[1], width / 2 + 3 + FONTW*2, 2);
+    } else {
+
+      drawNumber(pongTime.hour[0], width / 2 - 2 - 2 * FONTW, 2);
+      drawNumber(pongTime.hour[1], width / 2 - 1 - FONTW, 2);
+      drawNumber(pongTime.minute[0], width / 2 + 2, 2);
+      drawNumber(pongTime.minute[1], width / 2 + 3 + FONTW, 2);
+    }
     break;
   case RIGTH_LOOSE:
   case LEFT_LOOSE:
-    drawNumber(pongTime.pHour[0], width / 2 - 3 - 2 * FONTW, 2);
-    drawNumber(pongTime.pHour[1], width / 2 - 1 - FONTW, 2);
-    drawNumber(pongTime.pMinute[0], width / 2 + 2, 2);
-    drawNumber(pongTime.pMinute[1], width / 2 + 3 + FONTW, 2);
+    if (_config.bigFont) {
+      drawBigNumber(pongTime.pHour[0], width / 2 - 2 - 2 * FONTW*2, 2);
+      drawBigNumber(pongTime.pHour[1], width / 2 - 1 - FONTW*2, 2);
+      drawBigNumber(pongTime.pMinute[0], width / 2 + 1, 2);
+      drawBigNumber(pongTime.pMinute[1], width / 2 + 2 + FONTW*2, 2);
+    } else {
+      drawNumber(pongTime.pHour[0], width / 2 - 2 - 2 * FONTW, 2);
+      drawNumber(pongTime.pHour[1], width / 2 - 1 - FONTW, 2);
+      drawNumber(pongTime.pMinute[0], width / 2 + 1, 2);
+      drawNumber(pongTime.pMinute[1], width / 2 + 2 + FONTW, 2);
+    }
     break;
   }
 
@@ -257,7 +278,7 @@ void Pong::updateBall() {
 
 void Pong::updatePaddles() {
 
-  if (_paddleLeftY-_paddleRigthVy > _paddleLeftYTarget)
+  if (_paddleLeftY - _paddleRigthVy > _paddleLeftYTarget)
     _paddleLeftY -= _paddleLeftVy;
   else if (_paddleLeftY < _paddleLeftYTarget)
     _paddleLeftY += _paddleLeftVy;
@@ -269,7 +290,7 @@ void Pong::updatePaddles() {
     _paddleLeftY = 0;
   }
 
-  if (_paddleRigthY-_paddleRigthVy > _paddleRigthYTarget)
+  if (_paddleRigthY - _paddleRigthVy > _paddleRigthYTarget)
     _paddleRigthY -= _paddleRigthVy;
   else if (_paddleRigthY < _paddleRigthYTarget)
     _paddleRigthY += _paddleRigthVy;

@@ -54,6 +54,7 @@ private:
   float _ballY;
   float _ballVY;
   float _ballVX;
+  configuration_t _config;
   pongTime_t pongTime;
   playState_t _playState;
   void updateBall();

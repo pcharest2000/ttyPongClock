@@ -3,9 +3,9 @@
 #include "pong.h"
 #include <getopt.h>
 int main(int argc, char **argv) {
-configuration_t config = {.fgColor = 7, .bgColor = 0, .frameRate = 20};
+configuration_t config = {.fgColor = 7, .bgColor = 0, .frameRate = 20, .bigFont=FALSE};
   int c;
-  while ((c = getopt(argc, argv, "hC:B:F:")) != -1) {
+  while ((c = getopt(argc, argv, "hbC:B:F:")) != -1) {
     switch (c) {
     case 'h':
     default:
@@ -13,7 +13,8 @@ configuration_t config = {.fgColor = 7, .bgColor = 0, .frameRate = 20};
           "usage : tty-pong-clock [-B [0-7] -C [0-7] -F [1-60] ]            \n"
           "    -C            Set forground color                            \n"
           "    -B            Set background color                           \n"
-          "    -F            Set frame rate deffaut 30                        "
+          "    -F            Set frame rate deffaut 30                      \n"
+          "    -b            Set big font                                     "
           "\n");
       exit(EXIT_SUCCESS);
       break;
@@ -28,6 +29,9 @@ configuration_t config = {.fgColor = 7, .bgColor = 0, .frameRate = 20};
     case 'F':
       if (atoi(optarg) >= 1 && atoi(optarg) <= 60)
         config.frameRate = atoi(optarg);
+      break;
+    case 'b':
+      config.bigFont=TRUE;
       break;
     }
   }

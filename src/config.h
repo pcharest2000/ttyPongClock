@@ -5,8 +5,8 @@ typedef struct {
   int fgColor;
   int bgColor;
   int frameRate;
-
+  bool bigFont;
 } configuration_t;
-//configuration_t config = {.fgColor = 0, .bgColor = 7, .frameRate = 20};
-//extern configuration_t config;
+// configuration_t config = {.fgColor = 0, .bgColor = 7, .frameRate = 20};
+// extern configuration_t config;
 #endif // __CONFIG_H_
