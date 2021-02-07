@@ -22,8 +22,7 @@ Build requirements:
 * lib ncurses
 
 
-* Clone the repo:/
-* git clone https://github.com/pcharest2000/ttyPongClock.git 
+* Clone the repo:  git clone https://github.com/pcharest2000/ttyPongClock.git 
 * cd ttyPongClone
 * make
 * Copy in the build directory tty-pong-clock somewhere in your path/
@@ -31,3 +30,14 @@ Build requirements:
 ## Where can I get help?
 
 For support & all other kinds of questions open an issue ticket.  Comments negative or postive are welcomed!
+
+## Configuration
+Notes: Colors are indexes of your tty. The higher the frame rate the higer is cpu usage and ball is faster!
+
+<pre>
+usage : tty-pong-clock [-B [0-7] -C [0-7] -F [1-60] ]            
+    -C            Set forground color                            
+    -B            Set background color                           
+    -F            Set frame rate default 30                      
+    -b            Set big font                  
+</pre>
