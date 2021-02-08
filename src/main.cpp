@@ -1,3 +1,27 @@
+/* license {{{ */
+/*
+
+tty-pong-clock
+
+A nice animated pong clock that runs in the terminal..
+Author, current maintainer: Philippe Charest <philippe.charest@gmail.com>
+
+Copyright (C) 2021
+
+This program is free software which I release under the GNU General Public
+License. You may redistribute and/or modify this program under the terms
+of that license as published by the Free Software Foundation; either
+version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+To get a copy of the GNU General Puplic License,  write to the
+Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+*/
+/* }}} */
 #include "config.h"
 #include "matrix.h"
 #include "pong.h"
@@ -10,7 +34,7 @@ configuration_t config = {.fgColor = 7, .bgColor = 0, .frameRate = 20, .bigFont=
     case 'h':
     default:
       printf(
-          "usage : tty-pong-clock [-B [0-7] -C [0-7] -F [1-60] ]            \n"
+          "usage : tty-pong-clock [-b] [-B [0-7] -C [0-7] -F [1-60] ]            \n"
           "    -C            Set forground color                            \n"
           "    -B            Set background color                           \n"
           "    -F            Set frame rate default 30 fps                  \n"

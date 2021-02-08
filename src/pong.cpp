@@ -242,7 +242,7 @@ void Pong::updateBall() {
       _ballVX = -_ballVX;
       _ballX = width - PADTHICK - 2;
       _paddleRigthYTarget = RandomFloat(0, heigth - PADHEIGTH);
-      //_paddleRigthYTarget = floor(_paddleRigthYTarget);
+      _paddleRigthVy = RandomFloat(0.5, 1.5);
       callLeftTarget();
     } else if (_ballX <= 0 + PADTHICK) {
       if (_ballVY < 0)
@@ -252,7 +252,7 @@ void Pong::updateBall() {
       _ballVX = -_ballVX;
       _ballX = PADTHICK;
       _paddleLeftYTarget = RandomFloat(0, heigth - PADHEIGTH);
-      //_paddleLeftYTarget = floor(_paddleLeftYTarget);
+      _paddleLeftVy = RandomFloat(0.5, 1.5);
       callRigthTarget();
     }
   }
@@ -284,7 +284,7 @@ void Pong::updateBall() {
 
 void Pong::updatePaddles() {
 
-  if (_paddleLeftY - _paddleRigthVy > _paddleLeftYTarget)
+  if (_paddleLeftY - _paddleLeftVy > _paddleLeftYTarget)
     _paddleLeftY -= _paddleLeftVy;
   else if (_paddleLeftY < _paddleLeftYTarget)
     _paddleLeftY += _paddleLeftVy;
