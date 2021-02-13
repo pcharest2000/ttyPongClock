@@ -6,7 +6,7 @@
 #define PADHEIGTH 12
 #define BALLMAXV 0.9
 #define BALLMINV 0.3
-
+#define BALLSIZE 2
 #define FONTW 3
 #define FONTH 5
 /* Number matrix */

@@ -20,6 +20,7 @@ GNU General Public License for more details.
 
 To get a copy of the GNU General Puplic License,  write to the
 Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+
 */
 /* }}} */
 #include "config.h"
@@ -59,14 +60,10 @@ configuration_t config = {.fgColor = 7, .bgColor = 0, .frameRate = 20, .bigFont=
       break;
     }
   }
-  //
-  // nodelay(stdscr, TRUE);
-  // Matrix mat = Matrix();
   Pong pong = Pong(config);
   while (1) {
     pong.update();
     pong.draw();
-    // mat.draw();
     refresh();
     c = getch();
     switch (c) {

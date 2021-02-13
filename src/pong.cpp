@@ -101,10 +101,16 @@ void Pong::draw() {
     }
   }
   // Draw the ball
-  set(_ballY, _ballX);
-  set(_ballY + 1, _ballX);
-  set(_ballY, _ballX + 1);
-  set(_ballY + 1, _ballX + 1);
+
+  for (int i = 0; i < BALLSIZE; i++) {
+    for (int j = 0; j < BALLSIZE; j++) {
+  set(_ballY+i, _ballX+j);
+    }
+  }
+  // set(_ballY, _ballX);
+  // set(_ballY + 1, _ballX);
+  // set(_ballY, _ballX + 1);
+  // set(_ballY + 1, _ballX + 1);
 
   Matrix::draw();
   // move(0, 0);
@@ -150,21 +156,20 @@ void Pong::update() {
   updatePaddles();
 }
 
+//Calculates where the verticle position where the ball will hit
 void Pong::callRigthTarget() {
   // Call where the ball will hit
   float startX = _ballX;
   float startY = _ballY;
   float ballVy = _ballVY;
   float ballVx = _ballVX;
-
   int ticks = 0; // Number of ticks to reach target
   while (startX <= width - PADTHICK) {
     ticks++;
     startX += _ballVX;
     startY += ballVy;
-
-    if (startY >= heigth - 2) {
-      startY = heigth - 2;
+    if (startY >= heigth - BALLSIZE) {
+      startY = heigth - BALLSIZE;
       ballVy = -ballVy;
     } else if (startY <= 0) {
       ballVy = -ballVy;
@@ -197,8 +202,8 @@ void Pong::callLeftTarget() {
     ticks++;
     startX += _ballVX;
     startY += ballVy;
-    if (startY >= heigth - 2) {
-      startY = heigth - 2;
+    if (startY >= heigth - BALLSIZE) {
+      startY = heigth - BALLSIZE;
       ballVy = -ballVy;
     } else if (startY <= 0) {
       ballVy = -ballVy;
@@ -225,8 +230,8 @@ void Pong::callLeftTarget() {
 void Pong::updateBall() {
   _ballX += _ballVX;
   _ballY += _ballVY;
-  if (_ballY >= heigth - 2) {
-    _ballY = heigth - 2;
+  if (_ballY >= heigth - BALLSIZE) {
+    _ballY = heigth - BALLSIZE;
     _ballVY = -_ballVY;
   } else if (_ballY <= 0) {
     _ballVY = -_ballVY;
@@ -240,7 +245,7 @@ void Pong::updateBall() {
       else
         _ballVY = RandomFloat(BALLMINV, BALLMAXV);
       _ballVX = -_ballVX;
-      _ballX = width - PADTHICK - 2;
+      _ballX = width - PADTHICK - BALLSIZE;
       _paddleRigthYTarget = RandomFloat(0, heigth - PADHEIGTH);
       _paddleRigthVy = RandomFloat(0.5, 1.5);
       callLeftTarget();
@@ -270,7 +275,7 @@ void Pong::updateBall() {
   }
 
   if (_playState == LEFT_LOOSE) {
-    if (_ballX < -2) {
+    if (_ballX < -BALLSIZE) {
       _playState = NORMAL;
       _ballVX = 1;
       _ballVY = 1.3;
