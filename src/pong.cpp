@@ -15,7 +15,7 @@ Pong::Pong(configuration_t &config) : Matrix(config) {
   _paddleRigthY = 10;
   _ballVX = 1.3;
   _ballVY = BALLMINV;
-  _ballX = width / 2;
+  _ballX = _width / 2;
   _ballY = 10;
   _paddleLeftVy = 0.7;  //_ballVY + 0.1;
   _paddleRigthVy = 0.7; //_ballVY + 0.1;
@@ -33,11 +33,18 @@ Pong::Pong(configuration_t &config) : Matrix(config) {
   pongTime.minute[1] = pongTime.tm->tm_min % 10;
 }
 
+void drawModern(int n, int x, int y){
+  if (n>10)
+    return;
+  for(int j =0 ;j<FONTMH;j++){
+    //for(int b=0;b<)
+  }
+}
 void Pong::drawNumber(int n, int x, int y) {
-  for (int j = 0; j < 5; j++) {
-    for (int i = 0; i < 3; i++) {
-      if (number[n][i + 3 * j]) {
-        set(j + y, i + x);
+    for (int j = 0; j < 5; j++) {
+  for (int i = 0; i < 3; i++) {
+      if (numberFont[n][i + 3 * j]) {
+        setPix( i + x,j+y);
       }
     }
   }
@@ -46,11 +53,11 @@ void Pong::drawNumber(int n, int x, int y) {
 void Pong::drawBigNumber(int n, int x, int y) {
   for (int j = 0; j < 5; j++) {
     for (int i = 0; i < 3; i++) {
-      if (number[n][i + 3 * j]) {
-        set(j * 2 + y, i * 2 + x);
-        set(j * 2 + y + 1, i * 2 + x);
-        set(j * 2 + y, i * 2 + x + 1);
-        set(j * 2 + y + 1, i * 2 + x + 1);
+      if (numberFont[n][i + 3 * j]) {
+        setPix(i * 2 + x, j * 2 + y);
+        setPix(i * 2 + x, j * 2 + y + 1);
+        setPix(i * 2 + x + 1, j * 2 + y);
+        setPix(i * 2 + x + 1, j * 2 + y + 1);
       }
     }
   }
@@ -61,56 +68,51 @@ void Pong::draw() {
   switch (_playState) {
   case NORMAL:
     if (_config.bigFont) {
-      drawBigNumber(pongTime.hour[0], width / 2 - 2 - 2 * FONTW * 2, 2);
-      drawBigNumber(pongTime.hour[1], width / 2 - 1 - FONTW * 2, 2);
-      drawBigNumber(pongTime.minute[0], width / 2 + 2, 2);
-      drawBigNumber(pongTime.minute[1], width / 2 + 3 + FONTW * 2, 2);
+      drawBigNumber(pongTime.hour[0], _width / 2 - 2 - 2 * FONTW * 2, 2);
+      drawBigNumber(pongTime.hour[1], _width / 2 - 1 - FONTW * 2, 2);
+      drawBigNumber(pongTime.minute[0], _width / 2 + 2, 2);
+      drawBigNumber(pongTime.minute[1], _width / 2 + 3 + FONTW * 2, 2);
     } else {
 
-      drawNumber(pongTime.hour[0], width / 2 - 2 - 2 * FONTW, 2);
-      drawNumber(pongTime.hour[1], width / 2 - 1 - FONTW, 2);
-      drawNumber(pongTime.minute[0], width / 2 + 2, 2);
-      drawNumber(pongTime.minute[1], width / 2 + 3 + FONTW, 2);
+      drawNumber(pongTime.hour[0], _width / 2 - 2 - 2 * FONTW, 2);
+      drawNumber(pongTime.hour[1], _width / 2 - 1 - FONTW, 2);
+      drawNumber(pongTime.minute[0], _width / 2 + 2, 2);
+      drawNumber(pongTime.minute[1], _width / 2 + 3 + FONTW, 2);
     }
     break;
   case RIGTH_LOOSE:
   case LEFT_LOOSE:
     if (_config.bigFont) {
-      drawBigNumber(pongTime.pHour[0], width / 2 - 2 - 2 * FONTW * 2, 2);
-      drawBigNumber(pongTime.pHour[1], width / 2 - 1 - FONTW * 2, 2);
-      drawBigNumber(pongTime.pMinute[0], width / 2 + 1, 2);
-      drawBigNumber(pongTime.pMinute[1], width / 2 + 2 + FONTW * 2, 2);
+      drawBigNumber(pongTime.pHour[0], _width / 2 - 2 - 2 * FONTW * 2, 2);
+      drawBigNumber(pongTime.pHour[1], _width / 2 - 1 - FONTW * 2, 2);
+      drawBigNumber(pongTime.pMinute[0], _width / 2 + 1, 2);
+      drawBigNumber(pongTime.pMinute[1], _width / 2 + 2 + FONTW * 2, 2);
     } else {
-      drawNumber(pongTime.pHour[0], width / 2 - 2 - 2 * FONTW, 2);
-      drawNumber(pongTime.pHour[1], width / 2 - 1 - FONTW, 2);
-      drawNumber(pongTime.pMinute[0], width / 2 + 1, 2);
-      drawNumber(pongTime.pMinute[1], width / 2 + 2 + FONTW, 2);
+      drawNumber(pongTime.pHour[0], _width / 2 - 2 - 2 * FONTW, 2);
+      drawNumber(pongTime.pHour[1], _width / 2 - 1 - FONTW, 2);
+      drawNumber(pongTime.pMinute[0], _width / 2 + 1, 2);
+      drawNumber(pongTime.pMinute[1], _width / 2 + 2 + FONTW, 2);
     }
     break;
   }
-
   // Draw the middle line
-  for (int i = 0; i < heigth; i += 2) {
-    set(i, width / 2);
+  for (int i = 0; i < _heigth; i += 2) {
+    setPix( _width / 2,i);
   }
   // Draw the padels
   for (int i = 0; i < PADTHICK; i++) {
     for (int j = 0; j < PADHEIGTH; j++) {
-      set(j + _paddleLeftY, i);
-      set(_paddleRigthY + j, i + width - PADTHICK);
+      setPix(i,j + _paddleLeftY);
+      setPix( i + _width - PADTHICK,_paddleRigthY + j);
     }
   }
   // Draw the ball
 
   for (int i = 0; i < BALLSIZE; i++) {
     for (int j = 0; j < BALLSIZE; j++) {
-  set(_ballY+i, _ballX+j);
+      setPix( _ballX + j,_ballY + i);
     }
   }
-  // set(_ballY, _ballX);
-  // set(_ballY + 1, _ballX);
-  // set(_ballY, _ballX + 1);
-  // set(_ballY + 1, _ballX + 1);
 
   Matrix::draw();
   // move(0, 0);
@@ -156,7 +158,7 @@ void Pong::update() {
   updatePaddles();
 }
 
-//Calculates where the verticle position where the ball will hit
+// Calculates where the verticle position where the ball will hit
 void Pong::callRigthTarget() {
   // Call where the ball will hit
   float startX = _ballX;
@@ -164,12 +166,13 @@ void Pong::callRigthTarget() {
   float ballVy = _ballVY;
   float ballVx = _ballVX;
   int ticks = 0; // Number of ticks to reach target
-  while (startX <= width - PADTHICK) {
+
+  while (startX <= _width - PADTHICK) {
     ticks++;
     startX += _ballVX;
     startY += ballVy;
-    if (startY >= heigth - BALLSIZE) {
-      startY = heigth - BALLSIZE;
+    if (startY >= _heigth - BALLSIZE) {
+      startY = _heigth - BALLSIZE;
       ballVy = -ballVy;
     } else if (startY <= 0) {
       ballVy = -ballVy;
@@ -181,14 +184,14 @@ void Pong::callRigthTarget() {
     _paddleRigthYTarget = startY - PADHEIGTH / 2;
     break;
   case RIGTH_LOOSE:
-    if (startY <= heigth / 2)
+    if (startY <= _heigth / 2)
       _paddleRigthYTarget = startY + 4;
     else
       _paddleRigthYTarget = startY - 3 - PADHEIGTH;
     break;
   }
-  float minSpeed = abs( _paddleRigthY - _paddleRigthYTarget) / ticks;
-  _paddleRigthVy = RandomFloat(minSpeed, minSpeed*1.3); //add some randomness
+  float minSpeed = abs(_paddleRigthY - _paddleRigthYTarget) / ticks;
+  _paddleRigthVy = RandomFloat(minSpeed, minSpeed * 1.3); // add some randomness
   //_paddleRigthYTarget = floor(_paddleRigthYTarget);
 }
 
@@ -202,8 +205,8 @@ void Pong::callLeftTarget() {
     ticks++;
     startX += _ballVX;
     startY += ballVy;
-    if (startY >= heigth - BALLSIZE) {
-      startY = heigth - BALLSIZE;
+    if (startY >= _heigth - BALLSIZE) {
+      startY = _heigth - BALLSIZE;
       ballVy = -ballVy;
     } else if (startY <= 0) {
       ballVy = -ballVy;
@@ -216,37 +219,37 @@ void Pong::callLeftTarget() {
     _paddleLeftYTarget = startY - PADHEIGTH / 2;
     break;
   case LEFT_LOOSE:
-    if (startY <= heigth / 2)
+    if (startY <= _heigth / 2)
       _paddleLeftYTarget = startY + 4;
     else
       _paddleLeftYTarget = startY - 3 - PADHEIGTH;
     break;
   }
   // Call the minimum speed of paddle to reach target;
-  float minSpeed = abs( _paddleLeftYTarget - _paddleLeftY) / ticks;
-  _paddleLeftVy = RandomFloat(minSpeed, minSpeed*1.3); //add some randomness
+  float minSpeed = abs(_paddleLeftYTarget - _paddleLeftY) / ticks;
+  _paddleLeftVy = RandomFloat(minSpeed, minSpeed * 1.3); // add some randomness
 }
 
 void Pong::updateBall() {
   _ballX += _ballVX;
   _ballY += _ballVY;
-  if (_ballY >= heigth - BALLSIZE) {
-    _ballY = heigth - BALLSIZE;
+  if (_ballY >= _heigth - BALLSIZE) {
+    _ballY = _heigth - BALLSIZE;
     _ballVY = -_ballVY;
   } else if (_ballY <= 0) {
     _ballVY = -_ballVY;
     _ballY = 0;
   }
   if (_playState == NORMAL) {
-    if (_ballX > width - PADTHICK - 3) {
+    if (_ballX > _width - PADTHICK - 3) {
       // add some randomsse to y component affter bounce
       if (_ballVY < 0)
         _ballVY = RandomFloat(-BALLMAXV, -BALLMINV);
       else
         _ballVY = RandomFloat(BALLMINV, BALLMAXV);
       _ballVX = -_ballVX;
-      _ballX = width - PADTHICK - BALLSIZE;
-      _paddleRigthYTarget = RandomFloat(0, heigth - PADHEIGTH);
+      _ballX = _width - PADTHICK - BALLSIZE;
+      _paddleRigthYTarget = RandomFloat(0, _heigth - PADHEIGTH);
       _paddleRigthVy = RandomFloat(0.5, 1.5);
       callLeftTarget();
     } else if (_ballX <= 0 + PADTHICK) {
@@ -256,18 +259,18 @@ void Pong::updateBall() {
         _ballVY = RandomFloat(BALLMINV, BALLMAXV);
       _ballVX = -_ballVX;
       _ballX = PADTHICK;
-      _paddleLeftYTarget = RandomFloat(0, heigth - PADHEIGTH);
+      _paddleLeftYTarget = RandomFloat(0, _heigth - PADHEIGTH);
       _paddleLeftVy = RandomFloat(0.5, 1.5);
       callRigthTarget();
     }
   }
 
   if (_playState == RIGTH_LOOSE) {
-    if (_ballX > width) {
+    if (_ballX > _width) {
       _playState = NORMAL;
       _ballVX = 1;
       _ballVY = 1.3;
-      _ballX = width / 2;
+      _ballX = _width / 2;
       _ballY = 10;
       callRigthTarget();
       return;
@@ -279,7 +282,7 @@ void Pong::updateBall() {
       _playState = NORMAL;
       _ballVX = 1;
       _ballVY = 1.3;
-      _ballX = width / 2;
+      _ballX = _width / 2;
       _ballY = 10;
       callRigthTarget();
       return;
@@ -294,8 +297,8 @@ void Pong::updatePaddles() {
   else if (_paddleLeftY < _paddleLeftYTarget)
     _paddleLeftY += _paddleLeftVy;
 
-  if (_paddleLeftY >= heigth - PADHEIGTH) {
-    _paddleLeftY = heigth - PADHEIGTH;
+  if (_paddleLeftY >= _heigth - PADHEIGTH) {
+    _paddleLeftY = _heigth - PADHEIGTH;
   }
   if (_paddleLeftY < 0) {
     _paddleLeftY = 0;
@@ -306,8 +309,8 @@ void Pong::updatePaddles() {
   else if (_paddleRigthY < _paddleRigthYTarget)
     _paddleRigthY += _paddleRigthVy;
 
-  if (_paddleRigthY >= heigth - PADHEIGTH) {
-    _paddleRigthY = heigth - PADHEIGTH;
+  if (_paddleRigthY >= _heigth - PADHEIGTH) {
+    _paddleRigthY = _heigth - PADHEIGTH;
   }
   if (_paddleRigthY < 0) {
     _paddleRigthY = 0;

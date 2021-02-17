@@ -9,8 +9,12 @@
 #define BALLSIZE 2
 #define FONTW 3
 #define FONTH 5
+#define FONTMW 15
+#define FONTMH 32
+#define FONTMWBYTE 2
+
 /* Number matrix */
-const bool number[][15] = {
+const bool numberFont[][15] = {
     {1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1}, /* 0 */
     {0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1}, /* 1 */
     {1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1}, /* 2 */
@@ -26,7 +30,6 @@ enum playState_t { NORMAL, LEFT_LOOSE, RIGTH_LOOSE };
 typedef struct {
   unsigned int hour[2];
   unsigned int minute[2];
-
   unsigned int pHour[2];
   unsigned int pMinute[2];
   int prevHour;
@@ -63,5 +66,6 @@ private:
   void callLeftTarget();
   void callRigthTarget();
   void updateTime();
+  void drawModern(int x, int y);
 };
 #endif // __PONG_H_

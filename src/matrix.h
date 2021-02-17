@@ -14,8 +14,8 @@
 using namespace std;
 class Matrix {
 protected:
-  int width;
-  int heigth;
+  int _width;
+  int _heigth;
   vector<vector<int>> mat;
   configuration_t _config;
 
@@ -23,8 +23,11 @@ public:
   Matrix(configuration_t &config);
   void draw();
   void clearScreen();
-  void set(int i, int j);
-  void clr(int i, int j);
+  void setPix(int i, int j);
+  void clrPix(int i, int j);
+  void drawLine(int x0, int y0, int x1, int y1);
+  void clrLine(int i, int j, int i2, int j2);
+  void drawFillRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h);
   void fillRnd();
   void resize();
 };

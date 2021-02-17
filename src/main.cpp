@@ -24,18 +24,22 @@ Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 */
 /* }}} */
 #include "config.h"
+#include "digit.h"
 #include "matrix.h"
 #include "pong.h"
 #include <getopt.h>
 int main(int argc, char **argv) {
-configuration_t config = {.fgColor = 7, .bgColor = 0, .frameRate = 20, .bigFont=FALSE};
+
+  configuration_t config = {
+      .fgColor = 7, .bgColor = 0, .frameRate = 20, .bigFont = FALSE};
   int c;
   while ((c = getopt(argc, argv, "hbC:B:F:")) != -1) {
     switch (c) {
     case 'h':
     default:
       printf(
-          "usage : tty-pong-clock [-b] [-B [0-7] -C [0-7] -F [1-60] ]            \n"
+          "usage : tty-pong-clock [-b] [-B [0-7] -C [0-7] -F [1-60] ]          "
+          "  \n"
           "    -C            Set forground color                            \n"
           "    -B            Set background color                           \n"
           "    -F            Set frame rate default 30 fps                  \n"
@@ -56,24 +60,30 @@ configuration_t config = {.fgColor = 7, .bgColor = 0, .frameRate = 20, .bigFont=
         config.frameRate = atoi(optarg);
       break;
     case 'b':
-      config.bigFont=TRUE;
+      config.bigFont = TRUE;
       break;
     }
   }
-  Pong pong = Pong(config);
+  //Pong pong = Pong(config);
+  Digit hour =  Digit(config, 6, 2, 2);
   while (1) {
-    pong.update();
-    pong.draw();
-    refresh();
+   // pong.update();
+   // pong.draw();
+    hour.clearScreen();
+    hour.Draw(6);
+    hour.Morph(7);
     c = getch();
     switch (c) {
     case KEY_RESIZE:
-      pong.resize();
+      // hour.resize();
+     // pong.resize();
       break;
+    case 'Q':
     case 'q':
       endwin();
       return 0;
       break;
     }
+  usleep(100000000);
   }
 }
