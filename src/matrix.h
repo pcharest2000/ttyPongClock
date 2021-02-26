@@ -14,15 +14,16 @@
 using namespace std;
 class Matrix {
 protected:
-  int _width;
-  int _heigth;
-  vector<vector<int>> mat;
-  configuration_t _config;
+  static int _width;
+  static int _heigth;
+  static configuration_t _config;
+  static vector<vector<int>> mat;
 
 public:
   Matrix(configuration_t &config);
   void draw();
   void clearScreen();
+  void setPix2(int x, int y);
   void setPix(int i, int j);
   void clrPix(int i, int j);
   void drawLine(int x0, int y0, int x1, int y1);
@@ -31,5 +32,4 @@ public:
   void fillRnd();
   void resize();
 };
-
 #endif // __MATRIX_H_

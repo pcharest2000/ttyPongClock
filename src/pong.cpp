@@ -192,7 +192,6 @@ void Pong::callRigthTarget() {
   }
   float minSpeed = abs(_paddleRigthY - _paddleRigthYTarget) / ticks;
   _paddleRigthVy = RandomFloat(minSpeed, minSpeed * 1.3); // add some randomness
-  //_paddleRigthYTarget = floor(_paddleRigthYTarget);
 }
 
 void Pong::callLeftTarget() {

@@ -64,19 +64,27 @@ int main(int argc, char **argv) {
       break;
     }
   }
-  //Pong pong = Pong(config);
-  Digit hour =  Digit(config, 6, 2, 2);
+   Pong pong = Pong(config);
+  // Digit hour2 = Digit(config, 0, 20, 2);
+  // Digit hour = Digit(config, 0, 0, 0);
+  uint8_t i = 0;
+   // hour.Draw(i);
+   // hour2.Draw(i);
   while (1) {
-   // pong.update();
-   // pong.draw();
-    hour.clearScreen();
-    hour.Draw(6);
-    hour.Morph(7);
+    i++;
+    if (i > 9)
+      i = 0;
+
+
+     // hour2.Morph(i);
+     // hour.Morph(i);
+    pong.update();
+    pong.draw();
     c = getch();
     switch (c) {
     case KEY_RESIZE:
       // hour.resize();
-     // pong.resize();
+       pong.resize();
       break;
     case 'Q':
     case 'q':
@@ -84,6 +92,6 @@ int main(int argc, char **argv) {
       return 0;
       break;
     }
-  usleep(100000000);
+  //  hour.draw();
   }
 }
