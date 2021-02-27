@@ -21,8 +21,15 @@ Matrix::Matrix(configuration_t &config) {
     keypad(stdscr, TRUE); /* We get F1, F2 etc..		*/
     curs_set(0);
     timeout(1000 / config.frameRate); // 30fps
-    start_color();
-    init_pair(1, config.fgColor, config.bgColor);
+    /*
+    * If you set a custom background, curses changes it to black
+    * This makes it optional.
+    */
+    if (config.useColor) {
+      start_color();
+      init_pair(1, config.fgColor, config.bgColor);
+    }
+    
     attron(COLOR_PAIR(1));
     getmaxyx(stdscr, _heigth, _width);
     _heigth = _heigth * 2;
