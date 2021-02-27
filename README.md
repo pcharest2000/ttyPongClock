@@ -1,7 +1,7 @@
 
 # tty-pong-clock
 
-## What is clock?
+## What is tty-clock?
 
 A work in progress!
 
@@ -28,7 +28,7 @@ Build requirements:
 * Clone the repo:  git clone https://github.com/pcharest2000/ttyPongClock.git 
 * cd ttyPongClone
 * make
-* Copy in the build directory tty-pong-clock somewhere in your path/
+* Copy in the build directory the executable tty-pong-clock somewhere in your path/
 
 ## Where can I get help?
 
@@ -38,9 +38,10 @@ For support & all other kinds of questions open an issue ticket.  Comments negat
 Notes: Colors are indexes of your tty. The higher the frame rate the higer is cpu usage and ball is faster!
 
 <pre>
-usage : tty-pong-clock [-B [0-7] -C [0-7] -F [1-60] ]            
-    -C            Set forground color                            
-    -B            Set background color                           
-    -F            Set frame rate default 30                      
-    -b            Set big font                  
+usage : tty-pong-clock [-b] [-c] [-B [0-7] -C [0-7] -F [1-60] ]      
+    -c            Enable curses setting back/foreground colors   
+    -C            Set forground color (implies -c)               
+    -B            Set background color (implies -c)              
+    -F            Set frame rate default 30 fps                  
+    -b            Set big font                                   
 </pre>
