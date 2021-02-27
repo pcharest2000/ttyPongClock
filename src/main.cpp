@@ -41,8 +41,8 @@ int main(int argc, char **argv) {
           "usage : tty-pong-clock [-b] [-B [0-7] -C [0-7] -F [1-60] ]          "
           "  \n"
           "    -c            Enable curses setting back/foreground colors   \n"
-          "    -C            Set forground color                            \n"
-          "    -B            Set background color                           \n"
+          "    -C            Set forground color (implies -c)               \n"
+          "    -B            Set background color (implies -c)              \n"
           "    -F            Set frame rate default 30 fps                  \n"
           "    -b            Set big font                                     "
           "\n");
