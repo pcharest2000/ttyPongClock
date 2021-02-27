@@ -38,7 +38,7 @@ int main(int argc, char **argv) {
     case 'h':
     default:
       printf(
-          "usage : tty-pong-clock [-b] [-B [0-7] -C [0-7] -F [1-60] ]          "
+          "usage : tty-pong-clock [-b] [-c] [-B [0-7] -C [0-7] -F [1-60] ]          "
           "  \n"
           "    -c            Enable curses setting back/foreground colors   \n"
           "    -C            Set forground color (implies -c)               \n"
