@@ -15,22 +15,24 @@ Matrix::Matrix(configuration_t &config) {
     initscr();
     if (has_colors() == FALSE) {
       printf("Terminal has no color exitng\n");
+      endwin();
       exit(EXIT_FAILURE);
     }
-    // cbreak();
+    cbreak();
+    noecho();
     keypad(stdscr, TRUE); /* We get F1, F2 etc..		*/
     curs_set(0);
     timeout(1000 / config.frameRate); // 30fps
     /*
-    * If you set a custom background, curses changes it to black
-    * This makes it optional.
-    */
+     * If you set a custom background, curses changes it to black
+     * This makes it optional.
+     */
     if (config.useColor) {
       start_color();
       init_pair(1, config.fgColor, config.bgColor);
+      attron(COLOR_PAIR(1));
     }
-    
-    attron(COLOR_PAIR(1));
+
     getmaxyx(stdscr, _heigth, _width);
     _heigth = _heigth * 2;
     // Alocate the pixel array
@@ -54,7 +56,6 @@ void Matrix::draw() {
         printw(" ");
     }
   }
-  //setPix2(2, 0);
   refresh();
 }
 
@@ -85,7 +86,7 @@ void Matrix::setPix2(int x, int y) {
   // if (mat[j][i] == 1 && mat[j + 1][i] == 1)
   // printw("█");
   // else if (mat[j][i] == 1 && mat[j + 1][i] == 0)
-  //   printw("▀");
+  //Matrix   printw("▀");
   // else if (mat[j][i] == 0 && mat[j + 1][i] == 1)
   //   printw("▄");
   // else

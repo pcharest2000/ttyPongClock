@@ -2,6 +2,7 @@
 #define __PONG_H_
 #include "matrix.h"
 #include <time.h>
+#include "utils.h"
 #define PADTHICK 2
 #define PADHEIGTH 12
 #define BALLMAXV 0.9
