@@ -42,7 +42,7 @@ int main(int argc, char **argv) {
           "    -c            Enable curses setting back/foreground colors   \n"
           "    -C            Set forground color (implies -c)               \n"
           "    -B            Set background color (implies -c)              \n"
-          "    -F            Set frame rate default 30 fps                  \n"
+          "    -F            Set frame rate default 30 fps, max 60 fps      \n"
           "    -b            Set big font                                     "
           "\n");
       exit(EXIT_SUCCESS);
@@ -68,9 +68,10 @@ int main(int argc, char **argv) {
     case 'F':
       if (atoi(optarg) >= 1 && atoi(optarg) <= 60) {
         config.frameRate = atoi(optarg);
-      } else {
-        printf("tty-pong-clock: %d if not a valid value for -F\n", atoi(optarg));
-        exit(EXIT_FAILURE);
+      } 
+      else{
+        printf("Framerate above 60 fps, this is not a third person shooter!");
+        exit(EXIT_SUCCESS);
       }
       break;
     case 'b':
@@ -84,10 +85,6 @@ int main(int argc, char **argv) {
    Pong pong = Pong(config);
   uint8_t i = 0;
   while (1) {
-    i++;
-    if (i > 9)
-      i = 0;
-
     pong.update();
     pong.draw();
     c = getch();
