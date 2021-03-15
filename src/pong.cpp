@@ -1,6 +1,5 @@
 #include "pong.h"
 
-
 Pong::Pong(configuration_t &config) : Matrix(config) {
   _paddleLeftY = 10;
   _paddleRigthY = 10;
@@ -23,18 +22,18 @@ Pong::Pong(configuration_t &config) : Matrix(config) {
   pongTime.minute[1] = pongTime.tm->tm_min % 10;
 }
 
-void drawModern(int n, int x, int y){
-  if (n>10)
+void drawModern(int n, int x, int y) {
+  if (n > 10)
     return;
-  for(int j =0 ;j<FONTMH;j++){
-    //for(int b=0;b<)
+  for (int j = 0; j < FONTMH; j++) {
+    // for(int b=0;b<)
   }
 }
 void Pong::drawNumber(int n, int x, int y) {
-    for (int j = 0; j < 5; j++) {
-  for (int i = 0; i < 3; i++) {
+  for (int j = 0; j < 5; j++) {
+    for (int i = 0; i < 3; i++) {
       if (numberFont[n][i + 3 * j]) {
-        setPix( i + x,j+y);
+        setPix(i + x, j + y);
       }
     }
   }
@@ -87,20 +86,20 @@ void Pong::draw() {
   }
   // Draw the middle line
   for (int i = 0; i < _heigth; i += 2) {
-    setPix( _width / 2,i);
+    setPix(_width / 2, i);
   }
   // Draw the padels
   for (int i = 0; i < PADTHICK; i++) {
     for (int j = 0; j < PADHEIGTH; j++) {
-      setPix(i,j + _paddleLeftY);
-      setPix( i + _width - PADTHICK,_paddleRigthY + j);
+      setPix(i, j + _paddleLeftY);
+      setPix(i + _width - PADTHICK, _paddleRigthY + j);
     }
   }
   // Draw the ball
 
   for (int i = 0; i < BALLSIZE; i++) {
     for (int j = 0; j < BALLSIZE; j++) {
-      setPix( _ballX + j,_ballY + i);
+      setPix(_ballX + j, _ballY + i);
     }
   }
 

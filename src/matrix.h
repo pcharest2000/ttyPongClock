@@ -10,14 +10,15 @@
 #include <string.h>
 #include <time.h>
 #include <unistd.h>
-#include <vector>
+#include <cstring>
 using namespace std;
 class Matrix {
 protected:
   static int _width;
   static int _heigth;
+  static int _matLen;
   static configuration_t _config;
-  static vector<vector<int>> mat;
+  static int **mat;
 
 public:
   Matrix(configuration_t &config);

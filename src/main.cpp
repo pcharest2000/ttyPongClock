@@ -28,7 +28,6 @@ Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #include "pong.h"
 #include <getopt.h>
 int main(int argc, char **argv) {
-
   configuration_t config = {
       .fgColor = 7, .bgColor = 0, .frameRate = 20, .bigFont = FALSE};
   int c;
@@ -37,12 +36,12 @@ int main(int argc, char **argv) {
     case 'h':
     default:
       printf(
-          "usage : tty-pong-clock [-b] [-c] [-B [0-7] -C [0-7] -F [1-60] ]          "
+          "usage : tty-pong-clock [-b] [-c] [-B [0-7] -C [0-7] -F [1-90] ]          "
           "  \n"
           "    -c            Enable curses setting back/foreground colors   \n"
           "    -C            Set forground color (implies -c)               \n"
           "    -B            Set background color (implies -c)              \n"
-          "    -F            Set frame rate default 30 fps, max 60 fps      \n"
+          "    -F            Set frame rate defaults to 20 fps                  \n"
           "    -b            Set big font                                     "
           "\n");
       exit(EXIT_SUCCESS);
@@ -63,9 +62,8 @@ int main(int argc, char **argv) {
       if (atoi(optarg) >= 1 && atoi(optarg) <= 60)
         config.frameRate = atoi(optarg);
       else{
-        printf("Framerate above 60 fps, this is not a third person shooter!");
-        exit(EXIT_SUCCESS);
-      }
+        printf("Frame rate out of range, between 1 and 90 is reasonable, this is not an FPS game!\n");
+        exit(EXIT_SUCCESS);}
       break;
     case 'b':
       config.bigFont = TRUE;
@@ -76,7 +74,6 @@ int main(int argc, char **argv) {
     }
   }
    Pong pong = Pong(config);
-  uint8_t i = 0;
   while (1) {
     pong.update();
     pong.draw();

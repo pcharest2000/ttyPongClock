@@ -13,15 +13,15 @@ OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
 DEPS := $(OBJS:.o=.d)
 
 INC_DIRS := $(shell find $(SRC_DIRS) -type d)
-INC_FLAGS := $(addprefix -I,$(INC_DIRS))
+INC_FLAGS := $(addprefix  -I,$(INC_DIRS))
 
-CPPFLAGS ?= $(INC_FLAGS) -MMD -MP -Wall
-debug: CPPFLAGS+=-g -pg
+#CPPFLAGS ?= $(INC_FLAGS)  -Wall  -pg
+CPPFLAGS ?= $(INC_FLAGSgc) -MMD -MP -Wall -O3 #-pg
 
 LDFLAGS =  -lncursesw -lstdc++ -lm
 
 $(BUILD_DIR)/$(TARGET_EXEC): $(OBJS)
-	$(CC) $(OBJS) -o $@ $(LDFLAGS)
+	$(CC) $(OBJS) -o $@ $(LDFLAGS) #-pg
 
 # assembly
 $(BUILD_DIR)/%.s.o: %.s

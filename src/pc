@@ -36,37 +36,47 @@ Matrix::Matrix(configuration_t &config) {
     getmaxyx(stdscr, _heigth, _width);
     _heigth = _heigth * 2;
     _matLen = _heigth * _width;
-//Allocate mat array
+    int **array2 = malloc(nrows * sizeof(int *));
+    array2[0] = malloc(nrows * ncolumns * sizeof(int));
+    for (i = 1; i < nrows; i++)
+      array2[i] = array2[0] + i * ncolumns;
+
     mat = (int **)malloc(_heigth * sizeof(int *));
     mat[0] = (int *)malloc(_width * _heigth * sizeof(int *));
-    for (int i = 0; i < _heigth; i++)
-      mat[i] = mat[0] + i * _width;
+    for (int i = 0; i < _width; i++)
+      mat[i] = mat[0] + i * _heigth;
+    // mat[i] = (int *)malloc(_width * sizeof(int));
+    // Alocate the pixel array
+
+    // mat.resize(_heigth);
+    // for (int j = 0; j < _heigth; j++)
+    //   mat[j].resize(_width);
   }
 }
 
 void Matrix::draw() {
-  move(0,0);
   for (int j = 0; j < _heigth - 1; j += 2) {
     for (int i = 0; i < _width; i++) {
+      move(j / 2, i);
       if (mat[j][i] == 1 && mat[j + 1][i] == 1)
-        addstr("█");
-        //printw("█");
+        printw("█");
       else if (mat[j][i] == 1 && mat[j + 1][i] == 0)
-        addstr("▀");
+        printw("▀");
       else if (mat[j][i] == 0 && mat[j + 1][i] == 1)
-        addstr("▄");
+        printw("▄");
       else
-        addch(' ');
+        printw(" ");
     }
   }
   refresh();
 }
 
 void Matrix::clearScreen() {
-   memset(&mat[0][0], 0, _width*_heigth * sizeof(int));
-  // for (int j = 0; j < _heigth; j++)
-  //   for (int i = 0; i < _width; i++)
-  //     mat[j][i] = 0;
+  // memset(&mat[0][0], 0, _width*_heigth * sizeof(int));
+  // memset(&mat[0][0], 0, mat.size()*mat[0].size() * sizeof(int));
+  for (int j = 0; j < _heigth; j++)
+    for (int i = 0; i < _width; i++)
+      mat[j][i] = 0;
 }
 
 void Matrix::setPix2(int x, int y) {
@@ -115,13 +125,6 @@ void Matrix::resize() {
   getmaxyx(stdscr, _heigth, _width);
   _heigth = _heigth * 2;
   _matLen = _heigth * _width;
-  free((void *)mat[0]);
-	free((void *)mat);
-//Allocate mat array
-    mat = (int **)malloc(_heigth * sizeof(int *));
-    mat[0] = (int *)malloc(_width * _heigth * sizeof(int *));
-    for (int i = 0; i < _heigth; i++)
-      mat[i] = mat[0] + i * _width;
   // Alocate the pixel array
   // Matrix::mat.resize(_heigth);
   // for (int j = 0; j < _heigth; j++)
