@@ -50,17 +50,24 @@ int main(int argc, char **argv) {
       if (atoi(optarg) >= 0 && atoi(optarg) < 8) {
         config.useColor = TRUE;
         config.fgColor = atoi(optarg);
+      } else {
+        printf("tty-pong-clock: %d is not a valid value for -C\n", atoi(optarg));
+        exit(EXIT_FAILURE);
       }
       break;
     case 'B':
       if (atoi(optarg) >= 0 && atoi(optarg) < 8) {
         config.useColor = TRUE;
         config.bgColor = atoi(optarg);
+      } else {
+        printf("tty-pong-clock: %d is not a valid value for -B\n", atoi(optarg));
+        exit(EXIT_FAILURE);
       }
       break;
     case 'F':
-      if (atoi(optarg) >= 1 && atoi(optarg) <= 60)
+      if (atoi(optarg) >= 1 && atoi(optarg) <= 60) {
         config.frameRate = atoi(optarg);
+      } 
       else{
         printf("Frame rate out of range, between 1 and 90 is reasonable, this is not an FPS game!\n");
         exit(EXIT_SUCCESS);}
